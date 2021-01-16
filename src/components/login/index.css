@@ -1,0 +1,8 @@
+.login{
+    width: 400px;
+    height: 500px;
+}
+.username_input{
+    display: flex;
+    justify-content: center;
+}
