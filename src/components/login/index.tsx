@@ -13,25 +13,29 @@ const Login: React.FC<LoginProps> = ({ title }) => {
     <form onSubmit={handleSubmit(onSubmit)} className="login">
       <div className="login_title">{title}</div>
       <div className="username">
-        <div className="username_title">UserName</div>
+        <div className="title">UserName</div>
         <div className="username_input">
           <input
+          className={`input ${errors.username ? 'erro': ""}`}
             type="text"
             name="username"
-            ref={register({ required: true })}
+            ref={register({ required: true, maxLength: 5 })}
           />
-          <div className="error">{errors.username && <p>Vui lòng nhập tên đăng nhập !</p>}</div>
+        {errors.username?.type ==="required" && <p className="error" >Vui lòng nhập tên đăng nhập !</p>}
+        {errors.username?.type === "maxLength" && <p className="error" >Không vượt quá 5 kí tự!</p>}
         </div>
       </div>
       <div className="login_password">
-        <div className="login_password_title">Password</div>
+        <div className="title">Password</div>
         <div className="login_password_input">
           <input
-            type="text"
+          className={`input ${errors.password ? "erro" : ""}`}
+            type="password"
             name="password"
-            ref={register({ required: true })}
+            ref={register({ required: true, minLength: 8 })}
           />
-          <div className="error">{errors.password && <p>Vui lòng nhập mật khẩu !</p>}</div>
+          {errors.password?.type === "required" && <p className="error">Vui lòng nhập mật khẩu !</p>}
+          {errors.password?.type === "minLength" && <p className="error">mật khẩu trên 7 kí tự !</p>}
         </div>
       </div>
       <div className="submit">
